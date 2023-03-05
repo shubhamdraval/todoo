@@ -12,8 +12,12 @@ html {
 
 /* Todo-add */
 
-.todo-add, .delete-all{
+.todo-add{
 margin: 20px 0px;
+}
+
+.delete-all{
+  margin: 20px auto;
 }
 
 

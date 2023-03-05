@@ -11,7 +11,9 @@ import {
   useToast,
   Button,
   CardFooter,
-  SimpleGrid
+  SimpleGrid,
+  Checkbox,
+  CheckboxGroup
 } from '@chakra-ui/react';
 import '../components/todo.css';
 
@@ -67,7 +69,7 @@ function Todo() {
   return (
     <ChakraProvider>
       <div className='container'>
-        <Text fontSize='5xl' align='center'>Todo List 📃</Text>
+        <Text fontSize='5xl' align='center'>Get things done</Text>
         <div className='todo-add'>
           <InputGroup>
             <Input placeholder='Ex. Buy groceries'
@@ -85,7 +87,7 @@ function Todo() {
             {
               todoItems.map((value, index) => {
                 return (
-                  <Card variant='filled' size='sm' direction='row' alignItems='center' justifyContent='space-between' key={index}>
+                  <Card draggable='true' variant='filled' size='sm' direction='row' alignItems='center' justifyContent='space-between' key={index}>
                     <CardBody>
                       <Badge colorScheme='purple'>{index}</Badge>
                       <Text fontSize='3xl'>{value}</Text>
@@ -102,6 +104,7 @@ function Todo() {
           </SimpleGrid>
         </div>
         <Button
+          visibility={todoItems.length ? "visible" : "hidden"}
           className='delete-all'
           onClick={deleteAllTodoItems}
         >Delete all ❌</Button>
