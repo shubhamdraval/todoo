@@ -47,7 +47,7 @@ function Todo() {
             todoItems.map((value, index) => {
               return (
                 <div className='todo-items' key={index}>
-                  <p>{value + "  " + index}</p>
+                  <p>{index + "  " + value}</p>
                   <button
                     onClick={() => deleteTodoItem(index)}
                   >Delete</button>
