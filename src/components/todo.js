@@ -1,5 +1,19 @@
 import React, { useState } from 'react';
-import { useToast } from '@chakra-ui/react'
+import {
+  ChakraProvider,
+  Card,
+  CardBody,
+  Heading,
+  CardHeader,
+  Text,
+  Input,
+  InputGroup,
+  InputRightElement,
+  useToast,
+  Button,
+  CardFooter,
+  SimpleGrid
+} from '@chakra-ui/react';
 import '../components/todo.css';
 
 function Todo() {
@@ -17,15 +31,15 @@ function Todo() {
     if (todoAddInput) {
       setTodoItems([...todoItems, todoAddInput]);
       toast({
-        title: 'Account created.',
-        description: "Task successfully created.",
+        title: 'Task created.',
         status: 'success',
+        variant: 'subtle',
         duration: 2000,
         isClosable: true,
       });
       setTodoAddInput('');
     }
-    //console.log(todoItems[0]);
+    //console.log(toast);
   }
 
   //Declaring a function to hadle delete todo item event.
@@ -38,40 +52,61 @@ function Todo() {
 
   //Declaring a function to hadle delete all todo item event.
   const deleteAllTodoItems = () => {
-    setTodoItems([]);
+    console.log(todoItems);
+    if (todoItems.length) {
+      toast({
+        title: 'All Tasks deleted.',
+        status: 'info',
+        variant: 'subtle',
+        duration: 2000,
+        isClosable: true,
+      });
+      setTodoItems([]);
+    }
   }
 
   return (
-    <>
+    <ChakraProvider>
       <div className='container'>
-        <h1>Todo List 📃</h1>
+        <Text fontSize='5xl' align='center'>Todo List 📃</Text>
         <div className='todo-add'>
-          <input placeholder='Ex. Buy groceries'
-            value={todoAddInput}
-            onChange={(e) => setTodoAddInput(e.target.value)}></input>
-          <button
-            onClick={addTodoItems}
-          >➕</button>
+          <InputGroup>
+            <Input placeholder='Ex. Buy groceries'
+              value={todoAddInput}
+              onChange={(e) => setTodoAddInput(e.target.value)}></Input>
+            <InputRightElement>
+              <Button
+                onClick={addTodoItems}
+              >➕</Button>
+            </InputRightElement>
+          </InputGroup>
         </div>
         <div className='todo-list'>
-          {
-            todoItems.map((value, index) => {
-              return (
-                <div className='todo-items' key={index}>
-                  <p>{index + "  " + value}</p>
-                  <button
-                    onClick={() => deleteTodoItem(index)}
-                  >Delete</button>
-                </div>
-              )
-            })
-          }
+          <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+            {
+              todoItems.map((value, index) => {
+                return (
+                  <Card key={index}>
+                    <CardBody>
+                      <Text fontSize='3xl'>{value}</Text>
+                    </CardBody>
+                    <CardFooter>
+                      <Button variant='solid' colorScheme='red' onClick={() => deleteTodoItem(index)}>
+                        Delete
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                )
+              })
+            }
+          </SimpleGrid>
         </div>
-        <button className='delete-all'
+        <Button
+          className='delete-all'
           onClick={deleteAllTodoItems}
-        >Delete all ❌</button>
+        >Delete all ❌</Button>
       </div>
-    </>
+    </ChakraProvider>
   );
 }
 
