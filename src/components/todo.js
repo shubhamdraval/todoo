@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ChakraProvider,
   Card,
@@ -22,7 +22,12 @@ function Todo() {
   // Declaring new state varialbe to handle input value.
   const [todoAddInput, setTodoAddInput] = useState("");
   //Declaring a state variable to store list of todo items.
-  const [todoItems, setTodoItems] = useState([]);
+  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todoItems')));
+
+  useEffect(() => {
+    localStorage.setItem('todoItems', JSON.stringify(todoItems));
+    console.log('CLOG for setItem called -----' + JSON.parse(localStorage.getItem('todoItems')));
+  }, [todoItems]);
 
   //Declaring variable for raising toasts.
   const toast = useToast()
@@ -107,7 +112,7 @@ function Todo() {
           visibility={todoItems.length ? "visible" : "hidden"}
           className='delete-all'
           onClick={deleteAllTodoItems}
-        >Delete all ❌</Button>
+        >❌ Delete all</Button>
       </div>
     </ChakraProvider>
   );
