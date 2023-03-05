@@ -3,7 +3,7 @@ import {
   ChakraProvider,
   Card,
   CardBody,
-  Heading,
+  Badge,
   CardHeader,
   Text,
   Input,
@@ -82,16 +82,17 @@ function Todo() {
           </InputGroup>
         </div>
         <div className='todo-list'>
-          <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(200px, 1fr))'>
+          <SimpleGrid columns={1} spacing={5}>
             {
               todoItems.map((value, index) => {
                 return (
-                  <Card key={index}>
+                  <Card variant='filled' size='sm' direction='row' alignItems='center' justifyContent='space-between' key={index}>
                     <CardBody>
+                      <Badge colorScheme='purple'>{index}</Badge>
                       <Text fontSize='3xl'>{value}</Text>
                     </CardBody>
                     <CardFooter>
-                      <Button variant='solid' colorScheme='red' onClick={() => deleteTodoItem(index)}>
+                      <Button variant='solid' size='sm' colorScheme='red' onClick={() => deleteTodoItem(index)}>
                         Delete
                       </Button>
                     </CardFooter>
