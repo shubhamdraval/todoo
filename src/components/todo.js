@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useToast } from '@chakra-ui/react'
 import '../components/todo.css';
 
 function Todo() {
@@ -8,10 +9,20 @@ function Todo() {
   //Declaring a state variable to store list of todo items.
   const [todoItems, setTodoItems] = useState([]);
 
+  //Declaring variable for raising toasts.
+  const toast = useToast()
+
   //Declaring a function to handle add todo event.
   const addTodoItems = () => {
     if (todoAddInput) {
       setTodoItems([...todoItems, todoAddInput]);
+      toast({
+        title: 'Account created.',
+        description: "Task successfully created.",
+        status: 'success',
+        duration: 2000,
+        isClosable: true,
+      });
       setTodoAddInput('');
     }
     //console.log(todoItems[0]);
