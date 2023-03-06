@@ -22,7 +22,7 @@ function Todo() {
   // Declaring new state varialbe to handle input value.
   const [todoAddInput, setTodoAddInput] = useState("");
   //Declaring a state variable to store list of todo items.
-  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todoItems')));
+  const [todoItems, setTodoItems] = useState(JSON.parse(localStorage.getItem('todoItems'))||[]);
 
   useEffect(() => {
     localStorage.setItem('todoItems', JSON.stringify(todoItems));
