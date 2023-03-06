@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 /.firebase
+/.github
 /.pnp
 .pnp.js
 firebase.json
